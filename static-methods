@@ -1,0 +1,29 @@
+class BankAccount:
+    MIN_BALANCE = 100
+
+    def __init__(self, owner, balance = 0):
+        self.owner = owner
+        self._balance = balance
+
+    def deposit(self, amount):
+        if self._is_valid_amount(amount):
+            self._balance += amount
+            self.__log_transction("deposit", amount)
+        else:
+            print("Deposit amount must be positive")
+
+    @staticmethod
+    def is_valid_interest_rate(rate):
+        return 0<= rate <= 5
+    
+    def _is_valid_amount(self, amount):
+        return amount > 0
+    
+    def __log_transction(self, transction_type, amount):
+        print(f"Logging {transction_type} of ${amount}. New balance: ${self._balance} ")
+    
+account = BankAccount("Alice", 500)
+account.deposit(200)
+
+print(BankAccount.is_valid_interest_rate(3))
+print(BankAccount.is_valid_interest_rate(10))
